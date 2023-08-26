@@ -1,40 +1,71 @@
-// Lista de contactos con datos predefinidos (cada contacto contiene el nombre y apellido como una sola cadena de caracteres, adicionalmente agregué el número del contacto)
-
+// Lista de contactos con datos predefinidos, agregando los nuevos parámetros solicitados
 let listaContactos = [
-  { nombreCompleto: "Anyerson Castellanos", Nro: 4121481324 },
-  { nombreCompleto: "Maria Castel", Nro: 4121234567 },
-  { nombreCompleto: "Esteban Duarte", Nro: 4161234567 }
-];
-console.log(listaContactos);
+  {
+    id: 1,
+    nombre: "Anyerson",
+    apellido: "Castellanos",
+    teléf: 4121481324,
+    ubicaciones: [{ ciudad: "Maracay", dirección: "Turmero" }]
+  },
 
-// Función para añadir un nuevo contacto a una lista
-function agregarContacto(nombreCompleto, Nro) {
+  {
+    id: 2,
+    nombre: "Maria",
+    apellido: "Castel",
+    teléf: 4121234567,
+    ubicaciones: [{ ciudad: "San Juan", dirección: "Guarico" }]
+  },
+
+  {
+    id: 3,
+    nombre: "Esteban",
+    apellido: "Duarte",
+    teléf: 4161234567,
+    ubicaciones: [{ ciudad: "San Juan", dirección: "Guarico" }]
+  }
+];
+console.log(JSON.stringify(listaContactos, null, 2));
+
+// Función para añadir un nuevo contacto a la lista, agregando los nuevos parámetros solicitados
+function agregarContacto(id, nombre, apellido, teléf, ubicaciones) {
   const nuevoContacto = {
-    nombreCompleto: nombreCompleto,
-    Nro: Nro
+    id: id,
+    nombre: nombre,
+    apellido: apellido,
+    teléf: teléf,
+    ubicaciones: ubicaciones
   };
 
   listaContactos.push(nuevoContacto);
-
-  console.log(listaContactos);
+  console.log(JSON.stringify(listaContactos, null, 2));
 }
-agregarContacto("Pedro Martinez", 4163132244);
-agregarContacto("David Diaz", 4163344556);
+agregarContacto(4, "Pedro", "Martinez", 4163132244, [
+  { ciudad: "Guanare", dirección: "Sucre" }
+]);
+agregarContacto(5, "David", "Diaz", 4163344556, [
+  { ciudad: "Cojedes", dirección: "Naguanagua" }
+]);
 
-// Función para borrar un contacto existente de la lista
-function borrarContacto(nombreCompleto) {
-  listaContactos = listaContactos.filter(
-    contacto => contacto.nombreCompleto !== nombreCompleto
-  );
+// Función para borrar un contacto existente de la lista, borrando también los nuevos parámetros solicitados
+function borrarContactoXId(id) {
+  listaContactos = listaContactos.filter(contacto => contacto.id !== id);
 }
-borrarContacto("Esteban Duarte");
-console.log(listaContactos);
+borrarContactoXId(parseInt("3"));
+console.log(JSON.stringify(listaContactos, null, 2));
 
 // Función para imprimir en consola los contactos presentes en la lista
 function imprimirContactos() {
   console.log("Lista de contactos:");
   listaContactos.forEach(function(contacto) {
-    console.log(contacto.nombreCompleto + " - " + contacto.Nro);
+    console.log(
+      contacto.nombre + " " + contacto.apellido + " - " + contacto.teléf
+    );
+    contacto.ubicaciones.forEach(function(ubicacion) {
+      console.log(
+        "Ubicación: " + ubicacion.ciudad + ", " + ubicacion.dirección
+      );
+    });
   });
 }
+
 imprimirContactos();
