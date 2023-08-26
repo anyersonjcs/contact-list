@@ -47,14 +47,14 @@ agregarContacto(5, "David", "Diaz", 4163344556, [
 ]);
 
 // Review-1: Función para actualizar un contacto existente en la lista buscando su id
-function actualizarContacto(id, nombre, apellido, teléfono, ubicaciones) {
+function actualizarContacto(id, nombre, apellido, teléf, ubicaciones) {
   const contactoExistente = listaContactos.find(contacto => contacto.id === id);
 
   // Acá creo una condición, de modo que si el contacto existe, actualice sus datos con los nuevos valores
   if (contactoExistente) {
     contactoExistente.nombre = nombre;
     contactoExistente.apellido = apellido;
-    contactoExistente.teléfono = teléfono;
+    contactoExistente.teléf = teléf;
     contactoExistente.ubicaciones = ubicaciones;
 
     console.log("Contacto actualizado correctamente");
